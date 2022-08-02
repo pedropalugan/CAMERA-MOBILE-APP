@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {View, TouchableOpacity, Text, SafeAreaView, Image, Modal, StyleSheet} from 'react-native'
+import {View, TouchableOpacity, Text, SafeAreaView, Image, Modal, StyleSheet, Share} from 'react-native'
 import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
 import * as Permissions from 'expo-permissions'
 import * as MediaLibrary from 'expo-media-library'
+import * as Sharing from 'expo-sharing'; 
 
 
 export default function Picture(){
@@ -48,6 +49,10 @@ export default function Picture(){
     .catch(error => console.log(error))
   }
 
+    const onShare = async () => {
+    await Sharing.shareAsync(capturedPhoto) 
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Camera
@@ -88,23 +93,31 @@ export default function Picture(){
         visible={open}
         >
           <View style={{
-            flex:1, justifyContent:"center", alignItems: 'center', margin:20
+            flex:1, justifyContent:"center", alignItems: 'center'
           }}>
 
-          <View style={{margin:10, flexDirection: 'row'}}>
-
-          <TouchableOpacity style={{margin:10}} onPress={ () => setOpen(false)}>
-            <FontAwesome name='window-close' size={50} color="#FF0000"/>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{margin:10}} onPress={ savePicture }>
+          <View style={{flex: 1, flexDirection: 'row', marginTop: 100, marginBottom: 40, justifyContent: 'space-between', alignContent: 'center', width: '50%'}}>
+          <TouchableOpacity onPress={ savePicture } style={{}}>
             <FontAwesome name='upload' size={50} color="#121212"/>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={ onShare }>
+            <FontAwesome name='share' size={50} color="#121212"/>
+          </TouchableOpacity>
+          </View>
 
           </View>
             <Image style={{width: '100%', height:450, borderRadius: 10}}
             source={{uri: capturedPhoto}}
             />
+
+        <View style={{
+            flex:1, justifyContent:"center", alignItems: 'center'
+          }}>
+          <TouchableOpacity onPress={() => setOpen(false)}>
+            <FontAwesome name='window-close' size={50} color="#FF0000"/>
+          </TouchableOpacity>
+
           </View>
         </Modal>
       }
