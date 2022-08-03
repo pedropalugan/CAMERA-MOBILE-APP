@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {View, TouchableOpacity, Text, SafeAreaView, Image, Modal, StyleSheet, Share} from 'react-native'
 import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
-import * as Permissions from 'expo-permissions'
+/* import * as Permissions from 'expo-permissions' */
 import * as MediaLibrary from 'expo-media-library'
 import * as Sharing from 'expo-sharing'; 
 
