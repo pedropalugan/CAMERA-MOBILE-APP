@@ -11,8 +11,19 @@ export default function Picture(){
   const camRef = useRef(null)
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHaspermission] = useState(null);
-  const [capturedPhoto, setCapturedPhoto] = useState(null)
+  const [capturedPhoto, setCapturedPhoto] = useState(null);
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off)
+  const [flashType, setFlashType] = useState('OFF')
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if(flash === 1){
+      setFlashType("ON")
+    }
+    else if (flash === 0){
+      setFlashType("OFF")
+    }
+  }, [flash])
 
   useEffect(() => {
     (async () => {
@@ -59,6 +70,7 @@ export default function Picture(){
         style={{ flex: 1 }}
         type={type}
         ref={camRef}
+        flashMode={flash}
       >
         <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
           <TouchableOpacity style={{
@@ -72,6 +84,20 @@ export default function Picture(){
                 : Camera.Constants.Type.back
             )}>
             <Text style={{ color: "#FFF", fontSize: 20, marginBottom: 13 }}>Trocar</Text>
+
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{
+            position: 'absolute',
+            bottom: 20,
+            left: 150 }}
+            onPress={() => setFlash(
+              flash === Camera.Constants.FlashMode.off
+              ? Camera.Constants.FlashMode.on 
+              : Camera.Constants.FlashMode.off 
+            )}
+            >
+ <Text style={{ color: "#FFF", fontSize: 20, marginBottom: 13 }}>Flash {flashType}</Text>
           </TouchableOpacity>
         </View>
       </Camera>
