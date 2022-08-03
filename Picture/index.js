@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {View, TouchableOpacity, Text, SafeAreaView, Image, Modal, StyleSheet, Share} from 'react-native'
 import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
-/* import * as Permissions from 'expo-permissions' */
+import * as Permissions from 'expo-permissions'
 import * as MediaLibrary from 'expo-media-library'
 import * as Sharing from 'expo-sharing'; 
 
@@ -31,7 +31,7 @@ export default function Picture(){
       setHaspermission(status === 'granted');
     })();
     (async () => {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
       setHaspermission(status === 'granted');
     })();
   }, [])
@@ -123,7 +123,7 @@ export default function Picture(){
           }}>
 
           <View style={{flex: 1, flexDirection: 'row', marginTop: 100, marginBottom: 40, justifyContent: 'space-between', alignContent: 'center', width: '50%'}}>
-          <TouchableOpacity onPress={ savePicture } style={{}}>
+          <TouchableOpacity onPress={ savePicture }>
             <FontAwesome name='upload' size={50} color="#121212"/>
           </TouchableOpacity>
 
@@ -158,3 +158,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+
