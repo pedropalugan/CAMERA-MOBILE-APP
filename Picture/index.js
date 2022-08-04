@@ -9,6 +9,8 @@ import * as Sharing from 'expo-sharing';
 
 export default function Picture(){
   const camRef = useRef(null)
+  const [boltColor, setBoltcolor] = useState('#FFF')
+  const [backColor, setBackcolor] = useState('#000')
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHaspermission] = useState(null);
   const [capturedPhoto, setCapturedPhoto] = useState(null);
@@ -19,9 +21,13 @@ export default function Picture(){
   useEffect(() => {
     if(flash === 1){
       setFlashType("ON")
+      setBoltcolor("#000")
+      setBackcolor("#FFF")
     }
     else if (flash === 0){
       setFlashType("OFF")
+      setBoltcolor("#FFF")
+      setBackcolor("#000")
     }
   }, [flash])
 
@@ -89,15 +95,20 @@ export default function Picture(){
 
           <TouchableOpacity style={{
             position: 'absolute',
-            bottom: 20,
-            left: 150 }}
+            bottom: 25,
+            left: 150,
+            borderRadius: '50%',
+            width: 40,
+            backgroundColor:backColor,
+            height: 40,
+            alignItems: 'center',}}
             onPress={() => setFlash(
               flash === Camera.Constants.FlashMode.off
               ? Camera.Constants.FlashMode.on 
               : Camera.Constants.FlashMode.off 
             )}
             >
- <Text style={{ color: "#FFF", fontSize: 20, marginBottom: 13 }}>Flash {flashType}</Text>
+          <FontAwesome name='bolt' size={23} color={boltColor} style={{marginTop: '20%'}}/>
           </TouchableOpacity>
         </View>
       </Camera>
