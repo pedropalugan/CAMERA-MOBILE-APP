@@ -81,7 +81,7 @@ export default function Picture(){
         <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
           <TouchableOpacity style={{
             position: 'absolute',
-            bottom: 20,
+            bottom: 32,
             left: 20
           }}
             onPress={() => setType(
@@ -89,14 +89,14 @@ export default function Picture(){
                 ? Camera.Constants.Type.front
                 : Camera.Constants.Type.back
             )}>
-            <Text style={{ color: "#FFF", fontSize: 20, marginBottom: 13 }}>Trocar</Text>
+            <FontAwesome name='repeat' size={23} color="#FFF"/>
 
           </TouchableOpacity>
 
           <TouchableOpacity style={{
             position: 'absolute',
             bottom: 25,
-            left: 150,
+            left: 80,
             borderRadius: '50%',
             width: 40,
             backgroundColor:backColor,
@@ -108,7 +108,7 @@ export default function Picture(){
               : Camera.Constants.FlashMode.off 
             )}
             >
-          <FontAwesome name='bolt' size={23} color={boltColor} style={{marginTop: '20%'}}/>
+          <FontAwesome name='flash' size={23} color={boltColor} style={{marginTop: '20%'}}/>
           </TouchableOpacity>
         </View>
       </Camera>
